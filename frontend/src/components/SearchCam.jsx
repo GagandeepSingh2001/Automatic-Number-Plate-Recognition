@@ -49,16 +49,18 @@ function SearchCam() {
       setIsDetecting(true);
       
       // Start video feed and detection feed from the backend
-      const eventSource = new EventSource("http://127.0.0.1:8000/video_feed");
       // Used eventsource instead of Axios to fetch data through live camera contunuously instead of just once
+      const eventSource = new EventSource("http://127.0.0.1:8000/video_feed");
       eventSource.onmessage = (event) => {
         try {
           const response = JSON.parse(event.data);
 
           if (response.type === "video") {
-            // Set the live video feed as base64 image
-            const img = `data:image/jpeg;base64,${response.image}`;
-            document.getElementById("liveFeed").src = img;
+            const liveFeed = document.getElementById("liveFeed");
+            if (liveFeed) {
+              const img = `data:image/jpeg;base64,${response.image}`;
+              liveFeed.src = img;
+            }
           } else if (response.type === "detection") {
             // Handle detection data
             if (response.reg_data) {
@@ -129,6 +131,7 @@ function SearchCam() {
       </div>
 
       {/* Code to show the fetched data */}
+      {data && (
       <div id="showData" className="relative mt-10 min-h-[600px]">
         <div className="min-h-[30rem] lg:w-[77rem] border rounded-md shadow-md overflow-auto flex flex-col items-center">
           <p className="text-sm m-2 text-center">
@@ -149,8 +152,7 @@ function SearchCam() {
               <img src={processedImage} alt="Detected Plate" className="w-48 h-auto" />
             </div>
           )}
-
-          {data && (
+          
             <ul className="m-5 p-5 border rounded-xl bg-gray-800 text-white">
               <li><strong>Owner Name:</strong> {data.owner_name}</li>
               <li><strong>Fuel Type:</strong> {data.fuel_type}</li>
@@ -159,11 +161,11 @@ function SearchCam() {
               <li><strong>Registration Authority:</strong> {data.registration_authority}</li>
               <li><strong>Registration Date:</strong> {data.registration_date}</li>
             </ul>
-          )}
         </div>
-      </div>
+      </div>)}
       
       {/* Live camera feed area */}
+      {data ? null : 
       <div id="showCam">
         <div className="mt-10 flex justify-center">
           <img
@@ -192,7 +194,7 @@ function SearchCam() {
             </button>
           )}
         </div>
-        </div>
+        </div>}
     </div>
   );
 }
