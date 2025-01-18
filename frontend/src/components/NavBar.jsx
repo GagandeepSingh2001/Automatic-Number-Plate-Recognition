@@ -65,16 +65,16 @@ const NavBar = () => {
                 
                 <ul className="hidden lg:flex space-x-12">
                     {/* scroll to the component using react-scroll */}
-                    <Link to="home" spy={true} smooth={true} duration={500} offset={-85} activeClass="text-orange-400">
+                    <Link to="home" spy={true} smooth={true} duration={500} offset={-85} activeClass="text-orange-400 border-b-2">
                         <li className="cursor-pointer hover:text-orange-400">Home</li>
                     </Link>
-                    <Link to="features" spy={true} smooth={true} duration={500} offset={-80} activeClass="text-orange-400">
+                    <Link to="features" spy={true} smooth={true} duration={500} offset={-75} activeClass="text-orange-400 border-b-2">
                         <li className="cursor-pointer hover:text-orange-400">Features</li>
                     </Link>
-                    <Link to="about" spy={true} smooth={true} duration={500} offset={-80} activeClass="text-orange-400">
+                    <Link to="about" spy={true} smooth={true} duration={500} offset={-75} activeClass="text-orange-400 border-b-2">
                         <li className="cursor-pointer hover:text-orange-400">About</li>
                     </Link>
-                    <Link to="contact" spy={true} smooth={true} duration={500} offset={-75} activeClass="text-orange-400">
+                    <Link to="contact" spy={true} smooth={true} duration={500} offset={-75} activeClass="text-orange-400 border-b-2">
                         <li className="cursor-pointer hover:text-orange-400">Contact</li>
                     </Link>
 
