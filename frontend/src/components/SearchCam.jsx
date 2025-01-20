@@ -173,7 +173,7 @@ function SearchCam() {
         >
           {isFullScreen ? <Shrink /> : <Maximize />}
         </button>
-        </div>
+        </div> 
 
         {!isDetecting ? (
             <button
