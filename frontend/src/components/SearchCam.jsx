@@ -4,6 +4,7 @@ import logo from "../assets/image.png";
 import { useAuth0 } from "@auth0/auth0-react";
 import { toast } from "sonner";
 import { useAuth } from "../contexts/AuthContext";
+import {Maximize, Shrink} from "lucide-react";
 
 function SearchCam() {
   const [data, setData] = useState(null);
@@ -11,6 +12,27 @@ function SearchCam() {
   const [licensePlate, setLicensePlate] = useState("");
   const [isDetecting, setIsDetecting] = useState(false);
   const eventSourceRef = useRef(null);
+
+  const [isFullScreen, setIsFullScreen] = useState(); // change to fullscreen mode
+  const cameraRef = useRef(null);
+
+  // Fullscreen toggle handler
+  const toggleFullScreen = () => {
+    const cameraElement = cameraRef.current;
+    setIsFullScreen(false);
+    if (!isFullScreen) {
+      // Enter full screen
+      if (cameraElement.requestFullscreen) {
+        cameraElement.requestFullscreen();
+      } else if (cameraElement.webkitRequestFullscreen) {
+        cameraElement.webkitRequestFullscreen(); // Safari
+      } else if (cameraElement.mozRequestFullScreen) {
+        cameraElement.mozRequestFullScreen(); // Firefox
+      } else if (cameraElement.msRequestFullscreen) {
+        cameraElement.msRequestFullscreen(); // IE/Edge
+      }
+    } 
+  };
 
   // code for the theme toggle button
          // Check for the saved theme in localStorage or default to dark mode
@@ -124,20 +146,60 @@ function SearchCam() {
         <button onClick={toggleMode} id="togglemode" className="ml-10 w-10 rounded-2xl border-2 border-black bg-white p-1 font-semibold uppercase text-black transition-all duration-300 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-[4px_4px_0px_black] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none">
         </button>
         <h1 className="font-bold bg-gradient-to-r from-orange-500 to-red-800 text-transparent bg-clip-text lg:text-4xl md:text-2xl">
-          AI License Plate Detection
+        Detect with AI & YOLO
         </h1>
         {isAuthenticated && <h1 className="text-red-500 lg:text-2xl">{user.name}</h1>}
         {userLoggedIn && <h1 className="text-red-500 lg:text-2xl">{currentUser.email}</h1>}
       </div>
 
+      <div id="showData" className="relative mt-10 min-h-[600px] lg:grid-cols-2 gap-5 md:flex ">
+
+        {/* Live camera feed area */}
+      
+      <div id="showCam" className="flex flex-col w-fit gap-5">
+        <div className="mt-10">
+          <img
+            src="https://clipart-library.com/2023/photo-camera-clipart-xl.png"
+            id="liveFeed"
+            alt="Live Camera Feed"
+            className="border-4 border-orange-500 rounded-lg"
+            style={{ width: "500px", height: "300px" }}
+            ref={cameraRef}
+          />
+          {/* Fullscreen button */}
+        <button
+          onClick={toggleFullScreen}
+          className="absolute top-14 left-2 z-40 w-fit rounded-2xl border-2 border-black bg-transparent p-1 font-semibold uppercase text-black transition-all duration-300 hover:bg-white hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-[4px_4px_0px_black] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none"
+        >
+          {isFullScreen ? <Shrink /> : <Maximize />}
+        </button>
+        </div>
+
+        {!isDetecting ? (
+            <button
+              onClick={startLiveDetection}
+              className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-800"
+            >
+              Start Detection
+            </button>
+          ) : (
+            <button
+              onClick={stopLiveDetection}
+              className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-800"
+            >
+              Stop Detection
+            </button>
+          )}
+
+        </div>
+
       {/* Code to show the fetched data */}
-      {data && (
-      <div id="showData" className="relative mt-10 min-h-[600px]">
-        <div className="min-h-[30rem] lg:w-[77rem] border rounded-md shadow-md overflow-auto flex flex-col items-center">
+      {/* {data && ( */}
+        <div className="min-h-[30rem] lg:w-[45rem] border mt-5 rounded-md shadow-md overflow-auto flex flex-col items-center">
           <p className="text-sm m-2 text-center">
             Detect license plates in real-time with AI and YOLO integration.
           </p>
-          <h2 className="text-center mt-2 text-orange-600">Detected Vehicle Data:</h2>
+          <h2 className="text-center mt-2 text-orange-600">Detected Vehicle Data will appear here:</h2>
 
           {licensePlate && (
             <div className="m-4 text-center">
@@ -153,48 +215,17 @@ function SearchCam() {
             </div>
           )}
           
-            <ul className="m-5 p-5 border rounded-xl bg-gray-800 text-white">
+           {data && (<ul className="m-5 p-5 border rounded-xl bg-gray-800 text-white">
               <li><strong>Owner Name:</strong> {data.owner_name}</li>
               <li><strong>Fuel Type:</strong> {data.fuel_type}</li>
               <li><strong>Model:</strong> {data.model}</li>
               <li><strong>Ownership:</strong> {data.ownership}</li>
               <li><strong>Registration Authority:</strong> {data.registration_authority}</li>
               <li><strong>Registration Date:</strong> {data.registration_date}</li>
-            </ul>
+            </ul>)} 
         </div>
-      </div>)}
-      
-      {/* Live camera feed area */}
-      {data ? null : 
-      <div id="showCam">
-        <div className="mt-10 flex justify-center">
-          <img
-            src="https://clipart-library.com/2023/photo-camera-clipart-xl.png"
-            id="liveFeed"
-            alt="Live Camera Feed"
-            className="border-4 border-orange-500 rounded-lg"
-            style={{ width: "700px", height: "400px" }}
-          />
-        </div>
-
-        <div className="mt-5 flex justify-center">
-          {!isDetecting ? (
-            <button
-              onClick={startLiveDetection}
-              className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-800"
-            >
-              Start Detection
-            </button>
-          ) : (
-            <button
-              onClick={stopLiveDetection}
-              className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-800"
-            >
-              Stop Detection
-            </button>
-          )}
-        </div>
-        </div>}
+      </div>
+      {/* )} */}
     </div>
   );
 }
