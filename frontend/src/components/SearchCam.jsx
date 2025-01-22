@@ -5,6 +5,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { toast } from "sonner";
 import { useAuth } from "../contexts/AuthContext";
 import {Maximize, Shrink} from "lucide-react";
+import { Watch } from 'react-loader-spinner';
+import cam from '../assets/cam.png';
 
 function SearchCam() {
   const [data, setData] = useState(null);
@@ -12,6 +14,8 @@ function SearchCam() {
   const [licensePlate, setLicensePlate] = useState("");
   const [isDetecting, setIsDetecting] = useState(false);
   const eventSourceRef = useRef(null);
+
+  const [isloading, setisloading] = useState(false); // loading state for skeleton loading animation
 
   const [isFullScreen, setIsFullScreen] = useState(); // change to fullscreen mode
   const cameraRef = useRef(null);
@@ -69,6 +73,10 @@ function SearchCam() {
   const startLiveDetection = () => {
     if (!isDetecting) {
       setIsDetecting(true);
+      setisloading(true); // Set loading true to display loader
+      setData(null); // removes the previously loaded data
+      setProcessedImage(""); // removes the previously processed image
+      setLicensePlate(""); // removes the previous data
       
       // Start video feed and detection feed from the backend
       // Used eventsource instead of Axios to fetch data through live camera contunuously instead of just once
@@ -89,6 +97,7 @@ function SearchCam() {
               setData(response.reg_data);
               setProcessedImage(`data:image/jpeg;base64,${response.processed_image}`);
               setLicensePlate(response.reg_data.registration_number);
+              setisloading(false); // removes loader
               toast.success("License plate detected and processed.");
             } else {
               toast.error("No data found for the detected license plate.");
@@ -116,9 +125,10 @@ function SearchCam() {
       setIsDetecting(false);
       if (eventSourceRef.current) {
         eventSourceRef.current.close();
+        setisloading(false);
         toast.info("Live detection stopped.");
       }
-      document.getElementById("liveFeed").src = "";
+      document.getElementById("liveFeed").src = (cam);
     }
   };
 
@@ -159,7 +169,7 @@ function SearchCam() {
       <div id="showCam" className="flex flex-col w-fit gap-5">
         <div className="mt-10">
           <img
-            src="https://clipart-library.com/2023/photo-camera-clipart-xl.png"
+            src= {cam}
             id="liveFeed"
             alt="Live Camera Feed"
             className="border-4 border-orange-500 rounded-lg"
@@ -200,6 +210,10 @@ function SearchCam() {
             Detect license plates in real-time with AI and YOLO integration.
           </p>
           <h2 className="text-center mt-2 text-orange-600">Detected Vehicle Data will appear here:</h2>
+
+          {isloading ? 
+          <><div className='flex w-full justify-center mt-10'><Watch radius={45} color='red'/></div>Scan a license plate via camera, and the fetched data will be momentarily displayed...</>
+          : <></>}
 
           {licensePlate && (
             <div className="m-4 text-center">

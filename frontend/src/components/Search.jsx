@@ -134,8 +134,9 @@ import { useAuth0 } from '@auth0/auth0-react';
 import axios from "axios";
 import { toast } from 'sonner';
 import { useAuth } from "../contexts/AuthContext";
-import Skeleton from 'react-loading-skeleton';
+// import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+import { Watch } from 'react-loader-spinner';
 
 function Search() {
     const [image, setImage] = useState(null);
@@ -159,7 +160,7 @@ function Search() {
     // Send base64 image string to Flask backend and receive processed image
     const handleUpload = async () => {
         if (!image) return;
-
+        setProcessedImage("");
         setisloading(true); // Set loading true to display loader
         // alert("Processing the Image to Extract data")
         toast.success("Processing the Image to Extract data")
@@ -292,7 +293,7 @@ function Search() {
 
                           
                           {isloading ? 
-                          <><div className='flex w-full justify-center'><Skeleton width={200} height={20} count={1} className="m-4 w-full" customHighlightBackground="linear-gradient(to right, #FFA500, #FF6347)"/></div></>
+                          <><div className='flex w-full justify-center'><Watch radius={45} color='red'/></div></>
                            : <></>}
                            <ul id='details' className='m-5 p-5 border-2 border-white rounded-xl hidden'>
                             {console.log(data)}
