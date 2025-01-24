@@ -4,7 +4,7 @@ import time
 import os
 from licensePlateDetection.pipeline.training_pipeline import TrainPipeline
 from licensePlateDetection.utils.main_utils import decodeImage, encodeImageIntoBase64
-from flask import Flask, request, jsonify, render_template, Response
+from flask import Flask, request, jsonify, render_template, Response, send_from_directory
 from flask_cors import CORS, cross_origin
 from licensePlateDetection.constant.application import APP_HOST, APP_PORT
 from licensePlateDetection.Database.anpr_database import ANPD_DB
@@ -23,6 +23,18 @@ import torch
 import cv2
 app = Flask(__name__)
 CORS(app)
+
+# Deployment part
+frontend_folder = os.path.join(os.getcwd(),"..","frontend")
+dist_folder = os.path.join(frontend_folder,"dist")
+
+# Server static files from the "dist" folder under the "frontend" directory
+@app.route("/",defaults={"filename":""})
+@app.route("/<path:filename>")
+def index(filename):
+  if not filename:
+    filename = "index.html"
+  return send_from_directory(dist_folder,filename)
 
 
 class ClientApp:
