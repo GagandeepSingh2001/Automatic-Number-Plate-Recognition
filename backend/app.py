@@ -41,6 +41,7 @@ class ClientApp:
     def __init__(self):
         self.filename = "inputImage.jpg"
 
+clApp = ClientApp()
 # training model 
 @app.route("/train")
 def trainRoute():
@@ -417,5 +418,4 @@ def video_feed():
 
      
 if __name__ == "__main__":
-    clApp = ClientApp()
     app.run(host=APP_HOST, port=8000)
