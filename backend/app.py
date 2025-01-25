@@ -49,30 +49,159 @@ def trainRoute():
     return "Training Successfull!!"
 
 # using image
+# @app.route("/predict", methods=['POST', 'GET'])
+# @cross_origin()
+# def predictRoute():
+#     try:
+#         data = request.get_json()
+#         image = data.get("image")
+#         # image = request.json['image']
+
+#         decodeImage(image, clApp.filename)
+
+#         os.system("cd yolov5/ && python detect.py --weights best.pt --img 416 --conf 0.5 --source ../data/inputImage.jpg --save-txt --save-conf")
+#          # Assuming YOLOv5 saves the result image and bounding box coordinates
+#         result_image_path = "yolov5/runs/detect/exp/inputImage.jpg"
+
+#         bbox_path = "yolov5/runs/detect/exp/labels/inputImage.txt"
+
+#         # Load the image
+#         image = Image.open(result_image_path)
+
+#         # Read the bounding box coordinates
+#         with open(bbox_path, 'r') as f:
+#             lines = f.readlines()
+
+#         # os.remove("yolov5/runs/detect/exp/inputImage1.jpg")
+#         for line in lines:
+#             # Assuming YOLOv5 format: class x_center y_center width height (normalized values)
+#             parts = line.split()
+#             x_center, y_center, width, height = map(float, parts[1:5])
+
+#             # Convert from normalized coordinates to pixel values
+#             img_width, img_height = image.size
+#             x_center = x_center * img_width
+#             y_center = y_center * img_height
+#             width = width * img_width
+#             height = height * img_height
+
+#             # Calculate the bounding box coordinates
+#             x1 = int(x_center - width / 2)
+#             y1 = int(y_center - height / 2)
+#             x2 = int(x_center + width / 2)
+#             y2 = int(y_center + height / 2)
+
+#             # Crop the image using the bounding box coordinates
+#             cropped_image = image.crop((x1, y1, x2, y2))
+#             cropped_image = cropped_image.resize((720, 360))
+
+#             enhancer = ImageEnhance.Sharpness(cropped_image)
+#             cropped_image = enhancer.enhance(2.0)
+
+#             enhancer = ImageEnhance.Contrast(cropped_image)
+#             cropped_image = enhancer.enhance(1.5)
+#             # Save the cropped image (you can customize the save path)
+#             cropped_image_path = f"yolov5/runs/detect/exp/crop.jpg"
+#             cropped_image.save(cropped_image_path)
+
+#         # OCR part
+#         print("extracting text")
+#         text = ocr_detection().extracting_text(cropped_image)
+        
+#         # Dealing with crop image
+#         opencodedbase64 = encodeImageIntoBase64(
+#             "yolov5/runs/detect/exp/crop.jpg")
+#         result = {"image": opencodedbase64.decode('utf-8')}
+#         # os.remove("yolov5/runs")
+#         shutil.rmtree("yolov5/runs")
+
+#         #  fetching data from api And Database
+
+#         dbS = ANPD_DB("ANPD","anpr_data")
+#         vechile_data  = dbS.get_vehicle_by_registration_number(text)
+
+#         if vechile_data:
+#             print(f"{text} number plate exist in database")
+#             reg_data = json.loads(json_util.dumps(vechile_data))
+#             response = {
+#             "processed_image": result,
+#             "reg_data":reg_data
+#             }
+#             print("data is dispalyed please check")
+#             return jsonify(response)
+
+#         else:
+#             print("fetching data by api as it is not present in database")
+
+#             res_data = Api_req().fetchApi(text)
+#         # Data Inserted to Database
+#             with open('data.json', 'w') as json_file:
+#                 json.dump(res_data,json_file,indent=4)
+            
+        
+        
+#             dbS.insert_data("data.json")
+#             os.remove("data.json")
+#             a = dbS.get_vehicle_by_registration_number(text)
+#             reg_data = json.loads(json_util.dumps(a))
+        
+
+#             print("connected")
+#             # print(text)
+            
+#             print(reg_data)
+#             response = {
+#                 "processed_image": result,
+#                 "reg_data":reg_data
+#             }
+
+#             return jsonify(response)
+#     except ValueError as val:
+#         print(val)
+#         return Response("Value not found inside  json data")
+#     except KeyError:
+#         return Response("Key value error incorrect key passed")
+#     except Exception as e:
+#         shutil.rmtree("yolov5/runs")
+#         print(e)
+#         result = "Invalid input"
+
+
+
+
 @app.route("/predict", methods=['POST', 'GET'])
 @cross_origin()
 def predictRoute():
     try:
         data = request.get_json()
         image = data.get("image")
-        # image = request.json['image']
+        
+        # Log the incoming data to ensure it's correct
+        print("Received image:", image)
 
         decodeImage(image, clApp.filename)
 
         os.system("cd yolov5/ && python detect.py --weights best.pt --img 416 --conf 0.5 --source ../data/inputImage.jpg --save-txt --save-conf")
-         # Assuming YOLOv5 saves the result image and bounding box coordinates
         result_image_path = "yolov5/runs/detect/exp/inputImage.jpg"
-
         bbox_path = "yolov5/runs/detect/exp/labels/inputImage.txt"
 
-        # Load the image
-        image = Image.open(result_image_path)
+        # Check if the paths are valid before trying to open the image
+        if not os.path.exists(result_image_path):
+            raise FileNotFoundError(f"Result image not found at path: {result_image_path}")
 
-        # Read the bounding box coordinates
+        image = Image.open(result_image_path)
         with open(bbox_path, 'r') as f:
             lines = f.readlines()
 
-        # os.remove("yolov5/runs/detect/exp/inputImage1.jpg")
+        # Additional logic...
+        for line in lines:
+            parts = line.split()
+            x_center, y_center, width, height = map(float, parts[1:5])
+
+            # Further logic for bounding box calculation and cropping...
+
+
+            # os.remove("yolov5/runs/detect/exp/inputImage1.jpg")
         for line in lines:
             # Assuming YOLOv5 format: class x_center y_center width height (normalized values)
             parts = line.split()
@@ -103,68 +232,55 @@ def predictRoute():
             # Save the cropped image (you can customize the save path)
             cropped_image_path = f"yolov5/runs/detect/exp/crop.jpg"
             cropped_image.save(cropped_image_path)
-
-        # OCR part
-        print("extracting text")
+        
+        # OCR extraction logic...
         text = ocr_detection().extracting_text(cropped_image)
         
-        # Dealing with crop image
-        opencodedbase64 = encodeImageIntoBase64(
-            "yolov5/runs/detect/exp/crop.jpg")
+        opencodedbase64 = encodeImageIntoBase64("yolov5/runs/detect/exp/crop.jpg")
         result = {"image": opencodedbase64.decode('utf-8')}
-        # os.remove("yolov5/runs")
+
+        # Clean up
         shutil.rmtree("yolov5/runs")
 
-        #  fetching data from api And Database
-
-        dbS = ANPD_DB("ANPD","anpr_data")
-        vechile_data  = dbS.get_vehicle_by_registration_number(text)
+        dbS = ANPD_DB("ANPD", "anpr_data")
+        vechile_data = dbS.get_vehicle_by_registration_number(text)
 
         if vechile_data:
-            print(f"{text} number plate exist in database")
             reg_data = json.loads(json_util.dumps(vechile_data))
-            response = {
-            "processed_image": result,
-            "reg_data":reg_data
-            }
-            print("data is dispalyed please check")
+            response = {"processed_image": result, "reg_data": reg_data}
             return jsonify(response)
 
-        else:
-            print("fetching data by api as it is not present in database")
+        # Fallback to fetching from API if not found in database
+        res_data = Api_req().fetchApi(text)
+        with open('data.json', 'w') as json_file:
+            json.dump(res_data, json_file, indent=4)
 
-            res_data = Api_req().fetchApi(text)
-        # Data Inserted to Database
-            with open('data.json', 'w') as json_file:
-                json.dump(res_data,json_file,indent=4)
-            
-        
-        
-            dbS.insert_data("data.json")
-            os.remove("data.json")
-            a = dbS.get_vehicle_by_registration_number(text)
-            reg_data = json.loads(json_util.dumps(a))
-        
+        dbS.insert_data("data.json")
+        os.remove("data.json")
 
-            print("connected")
-            # print(text)
-            
-            print(reg_data)
-            response = {
-                "processed_image": result,
-                "reg_data":reg_data
-            }
+        a = dbS.get_vehicle_by_registration_number(text)
+        reg_data = json.loads(json_util.dumps(a))
 
-            return jsonify(response)
+        response = {"processed_image": result, "reg_data": reg_data}
+        return jsonify(response)
+
     except ValueError as val:
-        print(val)
-        return Response("Value not found inside  json data")
-    except KeyError:
-        return Response("Key value error incorrect key passed")
+        print(f"ValueError: {val}")
+        return jsonify({"error": "Value not found in JSON data"}), 400
+
+    except KeyError as ke:
+        print(f"KeyError: {ke}")
+        return jsonify({"error": "Key error, incorrect key passed"}), 400
+
+    except FileNotFoundError as fnf_error:
+        print(f"FileNotFoundError: {fnf_error}")
+        return jsonify({"error": str(fnf_error)}), 404
+
     except Exception as e:
+        print(f"General Exception: {e}")
         shutil.rmtree("yolov5/runs")
-        print(e)
-        result = "Invalid input"
+        return jsonify({"error": f"An unexpected error occurred: {str(e)}"}), 500
+
 
    
 
