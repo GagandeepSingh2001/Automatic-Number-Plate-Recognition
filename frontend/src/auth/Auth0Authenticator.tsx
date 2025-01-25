@@ -9,7 +9,7 @@ type Props = {
 const Auth0Authenticator = ({ children }: Props) => {
     const domain ="dev-17a7be62tihqknfj.us.auth0.com";
     const clientId = "e7Qe9e9gSBkf32Psva4ajk0wYH0tW1Bh";
-    const redirectUri = "https://automatic-number-plate-recognition-6p6v.onrender.com";
+    const redirectUri = "http://127.0.0.1:8000";
 
     if(!domain || !clientId || !redirectUri){
         throw new Error('Missing Auth0 configuration variables');

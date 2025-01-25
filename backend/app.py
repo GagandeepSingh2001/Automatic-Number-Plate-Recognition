@@ -21,6 +21,7 @@ import numpy as np
 from PIL import Image, ImageEnhance
 import torch
 import cv2
+import gdown
 app = Flask(__name__)
 CORS(app)
 
@@ -186,6 +187,18 @@ def predictRoute():
             raise FileNotFoundError(f"Input image not found at path: {input_image_path}")
         else:
             print("file here")
+
+        if not os.path.exists("yolov5"):
+            print("yolov5 folder not exisit")
+        if not os.path.exists("yolov5/best.pt"):
+            print("best.pt file not present")
+            file_id = "1eXuW33q-juEqjaBOh1LPjgNJJKAELw07"
+            yolov5_folder = os.path.join(os.getcwd(), "yolov5")
+            output_path = os.path.join(yolov5_folder, "best.pt")
+            url = f"https://drive.google.com/uc?id={file_id}"
+            gdown.download(url, output_path, quiet=False)
+
+
 
         os.system("cd yolov5/ && python detect.py --weights best.pt --img 416 --conf 0.5 --source ../data/inputImage.jpg --save-txt --save-conf")
         result_image_path = "yolov5/runs/detect/exp/inputImage.jpg"
