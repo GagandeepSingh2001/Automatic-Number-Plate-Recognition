@@ -26,16 +26,16 @@ app = Flask(__name__)
 CORS(app)
 
 # Deployment part
-frontend_folder = os.path.join(os.getcwd(),"..","frontend")
-dist_folder = os.path.join(frontend_folder,"dist")
+# frontend_folder = os.path.join(os.getcwd(),"..","frontend")
+# dist_folder = os.path.join(frontend_folder,"dist")
 
-# Server static files from the "dist" folder under the "frontend" directory
-@app.route("/",defaults={"filename":""})
-@app.route("/<path:filename>")
-def index(filename):
-  if not filename:
-    filename = "index.html"
-  return send_from_directory(dist_folder,filename)
+# # Server static files from the "dist" folder under the "frontend" directory
+# @app.route("/",defaults={"filename":""})
+# @app.route("/<path:filename>")
+# def index(filename):
+#   if not filename:
+#     filename = "index.html"
+#   return send_from_directory(dist_folder,filename)
 
 
 class ClientApp:
