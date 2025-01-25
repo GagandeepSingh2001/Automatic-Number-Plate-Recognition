@@ -80,7 +80,7 @@ function SearchCam() {
       
       // Start video feed and detection feed from the backend
       // Used eventsource instead of Axios to fetch data through live camera contunuously instead of just once
-      const eventSource = new EventSource("http://127.0.0.1:8000/video_feed");
+      const eventSource = new EventSource("https://automatic-number-plate-recognition-6p6v.onrender.com/video_feed");
       eventSource.onmessage = (event) => {
         try {
           const response = JSON.parse(event.data);
