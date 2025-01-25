@@ -190,10 +190,14 @@ function Search() {
 
             
         } catch (error) {
+          setisloading(false); // removes loader
             console.error("Error uploading image:", error);
             // alert("Image upload failed.");
-            toast.error(error);
-        } finally {
+
+            // Check if error response exists and display a readable message
+            const errorMessage = error.response?.data?.error || error.message || 'An unknown error occurred.';
+            toast.error(errorMessage); // Show a toast notification with the error message
+        }  finally {
           setisloading(false); // removes loader
         }
     };
