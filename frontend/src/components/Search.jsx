@@ -249,7 +249,7 @@ function Search() {
                             <button onClick={toggleMode} id="togglemode" className="ml-10 w-10 rounded-2xl border-2 border-black bg-white p-1 font-semibold uppercase text-black transition-all duration-300 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-[4px_4px_0px_black] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none">
                             </button>
                           </div>
-                          <h1 className='font-bold bg-gradient-to-r from-orange-500 to-red-800 text-transparent bg-clip-text lg:text-4xl md:text-3xl'>Detect with AI & YOLO new</h1>
+                          <h1 className='font-bold bg-gradient-to-r from-orange-500 to-red-800 text-transparent bg-clip-text lg:text-4xl md:text-3xl'>Detect with AI & YOLO test</h1>
                           {isAuthenticated && <h1 className='text-red-500 tracking-widest text-2xl'>{user.name}</h1>}
                           {userLoggedIn && <h1 className='text-red-500 tracking-widest text-2xl'>{currentUser.email}</h1>}
                         </div>
