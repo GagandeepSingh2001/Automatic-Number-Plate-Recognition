@@ -181,6 +181,11 @@ def predictRoute():
         print("Received image:", image)
 
         decodeImage(image, clApp.filename)
+        input_image_path = "data/inputImage.jpg"
+        if not os.path.exists(input_image_path):
+            raise FileNotFoundError(f"Input image not found at path: {input_image_path}")
+        else:
+            print("file here")
 
         os.system("cd yolov5/ && python detect.py --weights best.pt --img 416 --conf 0.5 --source ../data/inputImage.jpg --save-txt --save-conf")
         result_image_path = "yolov5/runs/detect/exp/inputImage.jpg"
