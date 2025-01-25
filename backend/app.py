@@ -194,9 +194,9 @@ def predictRoute():
             lines = f.readlines()
 
         # Additional logic...
-        for line in lines:
-            parts = line.split()
-            x_center, y_center, width, height = map(float, parts[1:5])
+        # for line in lines:
+        #     parts = line.split()
+        #     x_center, y_center, width, height = map(float, parts[1:5])
 
             # Further logic for bounding box calculation and cropping...
 
