@@ -34,7 +34,7 @@ const SearchText = () => {
       
       try {
         
-            const response = await axios.post("https://automatic-number-plate-recognition-6p6v.onrender.com/text", {
+            const response = await axios.post("http://127.0.0.1:8000/text", {
             text: texts
           },
             {

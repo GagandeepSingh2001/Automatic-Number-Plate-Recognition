@@ -169,7 +169,7 @@ function Search() {
         details.classList.add("hidden");
         
         try {
-            const response = await axios.post("https://automatic-number-plate-recognition-6p6v.onrender.com/predict", {
+            const response = await axios.post("http://127.0.0.1:8000/predict", {
                 image: image.split(",")[1] // Send only the base64 part after the comma,
             },
             {
@@ -191,12 +191,15 @@ function Search() {
 
             
         } catch (error) {
+          setisloading(false); // removes loader
             console.error("Error uploading image:", error);
             // alert("Image upload failed.");
             toast.error(error);
-        } finally {
-          setisloading(false); // removes loader
-        }
+
+            // Check if error response exists and display a readable message
+            const errorMessage = error.response?.data?.message || error.message || 'An unknown error occurred.';
+            toast.error(errorMessage); // Show a toast notification with the error message
+        } 
     };
 
 
@@ -247,7 +250,7 @@ function Search() {
                             <button onClick={toggleMode} id="togglemode" className="ml-10 w-10 rounded-2xl border-2 border-black bg-white p-1 font-semibold uppercase text-black transition-all duration-300 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-[4px_4px_0px_black] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none">
                             </button>
                           </div>
-                          <h1 className='font-bold bg-gradient-to-r from-orange-500 to-red-800 text-transparent bg-clip-text lg:text-4xl md:text-3xl'>Detect with AI & YOLO</h1>
+                          <h1 className='font-bold bg-gradient-to-r from-orange-500 to-red-800 text-transparent bg-clip-text lg:text-4xl md:text-3xl'>Detect with AI & YOLO new</h1>
                           {isAuthenticated && <h1 className='text-red-500 tracking-widest text-2xl'>{user.name}</h1>}
                           {userLoggedIn && <h1 className='text-red-500 tracking-widest text-2xl'>{currentUser.email}</h1>}
                         </div>
