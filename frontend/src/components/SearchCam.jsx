@@ -112,6 +112,7 @@ function SearchCam() {
       eventSource.onerror = (error) => {
         console.error("Detection feed error:", error);
         toast.error("Detection feed connection error.");
+        setisloading(false);
         eventSource.close();
         setIsDetecting(false);
       };

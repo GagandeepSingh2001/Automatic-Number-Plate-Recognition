@@ -7,10 +7,13 @@ import axios from "axios";
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { useAuth } from "../contexts/AuthContext";
+import { Watch } from 'react-loader-spinner';
 
 const SearchText = () => {
   const [texts, setTexts] = useState(null);
   const [data, setData] = useState([]);
+
+  const [isloading, setisloading] = useState(false); // loading state for skeleton loading animation
     
     // Send base64 image string to Flask backend and receive processed image
     const handleUpload = async () => {
@@ -19,10 +22,12 @@ const SearchText = () => {
       console.log(texts);
       
       if (texts == "")  return toast("Please enter the license plate number...") ;
+      setisloading(true);
       // alert("Processing the Text to Extract data")
       toast.info("Processing the Text to Extract data")
       
       try {
+          if (texts == "")  return toast("Please enter the license plate number...") ;
         
             const response = await axios.post("http://127.0.0.1:8000/text", {
             text: texts
@@ -40,11 +45,14 @@ const SearchText = () => {
             // Unhide the data
             const details = document.getElementById("details");
             details.classList.remove("hidden");
+            setisloading(false); // removes loader
             
         } catch (error) {
             console.error("Error uploading:", error);
             // alert(error);
             toast.error("Failed to fetch data !");
+        }finally {
+          setisloading(false); // removes loader
         }
     };
 
@@ -125,8 +133,11 @@ const SearchText = () => {
       <p id="info" className='text-pretty text-orange-600'>
     
       <h1 className='text-center mt-2'>Data from API will appear here: </h1>
-    
-                              
+
+      {isloading ? 
+      <><div className='flex w-full justify-center mt-10'><Watch radius={45} color='red'/></div></>
+      : <></>}
+
       <ul id='details' className='m-5 p-5 border-2 border-white rounded-xl hidden text-center'>
         {console.log(data)}
         <li><span className='text-white'>Owner Name: </span>{data.owner_name}</li>
