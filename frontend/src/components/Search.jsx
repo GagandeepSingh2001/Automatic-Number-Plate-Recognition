@@ -135,7 +135,8 @@ import axios from "axios";
 import { toast } from 'sonner';
 import { useAuth } from "../contexts/AuthContext";
 import 'react-loading-skeleton/dist/skeleton.css';
-import { Watch } from 'react-loader-spinner';
+import loader from '../assets/loader.gif';
+// import { Watch } from 'react-loader-spinner';
 
 function Search() {
     const [image, setImage] = useState(null);
@@ -296,7 +297,7 @@ function Search() {
 
                           
                             {isloading ? 
-                            <><div className='flex w-full justify-center mt-10'><Watch radius={45} color='red'/></div></>
+                            <><div className='flex w-full justify-center mt-10'><img src={loader} className='w-40' alt="loader not available" /></div></>
                             : <></>}
                            <ul id='details' className='m-5 p-5 border-2 border-white rounded-xl hidden'>
                             {console.log(data)}

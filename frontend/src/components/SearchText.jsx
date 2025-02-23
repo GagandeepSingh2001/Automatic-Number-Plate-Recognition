@@ -7,7 +7,8 @@ import axios from "axios";
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { useAuth } from "../contexts/AuthContext";
-import { Watch } from 'react-loader-spinner';
+// import { Watch } from 'react-loader-spinner';
+import loader from '../assets/loader.gif';
 
 const SearchText = () => {
   const [texts, setTexts] = useState(null);
@@ -135,7 +136,7 @@ const SearchText = () => {
       <h1 className='text-center mt-2'>Data from API will appear here: </h1>
 
       {isloading ? 
-      <><div className='flex w-full justify-center mt-10'><Watch radius={45} color='red'/></div></>
+      <><div className='flex w-full justify-center mt-10'><img src={loader} className='w-40' alt="loader not available" /></div></>
       : <></>}
 
       <ul id='details' className='m-5 p-5 border-2 border-white rounded-xl hidden text-center'>

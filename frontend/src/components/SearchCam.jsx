@@ -5,7 +5,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { toast } from "sonner";
 import { useAuth } from "../contexts/AuthContext";
 import {Maximize, Shrink} from "lucide-react";
-import { Watch } from 'react-loader-spinner';
+import loader from '../assets/loader.gif';
 import cam from '../assets/cam.png';
 
 function SearchCam() {
@@ -213,7 +213,7 @@ function SearchCam() {
           <h2 className="text-center mt-2 text-orange-600">Detected Vehicle Data will appear here:</h2>
 
           {isloading ? 
-          <><div className='flex w-full justify-center mt-10'><Watch radius={45} color='red'/></div>Scan a license plate via camera, and the fetched data will be momentarily displayed...</>
+          <><div className='flex w-full justify-center mt-10'><img src={loader} className='w-40' alt="loader not available" /></div>Scan a license plate via camera, and the fetched data will be momentarily displayed...</>
           : <></>}
 
           {licensePlate && (

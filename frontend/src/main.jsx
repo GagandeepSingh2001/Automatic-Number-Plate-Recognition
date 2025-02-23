@@ -1,4 +1,4 @@
-import { StrictMode } from 'react'
+import { StrictMode, useState, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 // import App from './App.jsx'
 import './index.css'
@@ -17,6 +17,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Toaster } from 'sonner'
 import { AuthProvider } from './contexts/AuthContext.jsx'
 import SearchCam from './components/SearchCam.jsx'
+import loader from './assets/loader.gif'
 
 
 const router = createBrowserRouter([
@@ -70,14 +71,52 @@ const router = createBrowserRouter([
   }
 ])
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <AuthProvider>
-    <Auth0Authenticator>
-    {/* <App /> */}
-    <RouterProvider router = {router} basename="/"/>
-    </Auth0Authenticator>
-    </AuthProvider>
-    <Toaster richColors closeButton position="top-center" />
-  </StrictMode>,
-)
+
+
+// eslint-disable-next-line react-refresh/only-export-components
+const App = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate a loading period, or wait until your page content is ready
+    const timer = setTimeout(() => {
+      setIsLoading(false); // After 3 seconds, stop the loading spinner
+    }, 3000); // Adjust the delay as needed
+
+    // Clean up the timer on component unmount
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <StrictMode>
+      <AuthProvider>
+        <Auth0Authenticator>
+          {isLoading ? (
+            // Show the loading gif when the page is loading
+            <div className="grid place-items-center h-screen"><img src={loader}></img></div>
+          ) : (
+            // Render the RouterProvider only after loading is complete
+            <RouterProvider router={router} basename="/" />
+          )}
+        </Auth0Authenticator>
+      </AuthProvider>
+      <Toaster richColors closeButton position="top-center" />
+    </StrictMode>
+  );
+};
+
+createRoot(document.getElementById('root')).render(<App />);
+
+
+
+// createRoot(document.getElementById('root')).render(
+//   <StrictMode>
+//     <AuthProvider>
+//     <Auth0Authenticator>
+//     {/* <App /> */}
+//     <RouterProvider router = {router} basename="/"/>
+//     </Auth0Authenticator>
+//     </AuthProvider>
+//     <Toaster richColors closeButton position="top-center" />
+//   </StrictMode>,
+// )
