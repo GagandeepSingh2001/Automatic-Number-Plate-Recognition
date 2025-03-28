@@ -4,7 +4,7 @@ import time
 import os
 from licensePlateDetection.pipeline.training_pipeline import TrainPipeline
 from licensePlateDetection.utils.main_utils import decodeImage, encodeImageIntoBase64
-from flask import Flask, request, jsonify, render_template, Response
+from flask import Flask, request, jsonify, render_template, send_from_directory, Response
 from flask_cors import CORS, cross_origin
 from licensePlateDetection.constant.application import APP_HOST, APP_PORT
 from licensePlateDetection.Database.anpr_database import ANPD_DB
@@ -21,13 +21,19 @@ import numpy as np
 from PIL import Image, ImageEnhance
 import torch
 import cv2
-app = Flask(__name__)
+app = Flask(__name__, static_folder="../frontend/dist", static_url_path="/")
 CORS(app)
 
 
 class ClientApp:
     def __init__(self):
         self.filename = "inputImage.jpg"
+
+
+@app.route("/")
+def home():
+    return send_from_directory(app.static_folder, "index.html")
+
 
 # training model 
 @app.route("/train")
