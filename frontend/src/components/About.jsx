@@ -12,28 +12,28 @@ const About = () => {
     <div className="grid lg:grid-cols-2 gap-10 px-2 py-4 mt-10 rounded place-items-center">
 
       {/* First Card */}
-    <div className="image">
+    <div className="image order-1 lg:order-none">
       <img src={team} alt="Unable to Load..." className="rounded-md shadow-orange-500 shadow-lg w-96"></img>
     </div>
-    <div className="text">
+    <div className="text order-2 lg:order-none">
       <h1 className="text-4xl sm:text-6xl lg:text-7xl text-center tracking-wide">Our Team</h1>
       <p className="mt-10 text-lg text-center text-neutral-600 max-w-4xl text-pretty">Our team consists of experienced professionals with a passion for innovation and a deep understanding of ANPR technology. Our experts in computer vision, software development, and data analytics work together to design and develop cutting-edge solutions that meet the evolving needs of our customers.</p>
     </div>
 
       {/* Second Card */}
-    <div className="text">
+    <div className="text order-4 lg:order-none">
       <h1 className="text-4xl sm:text-6xl lg:text-7xl text-center tracking-wide">Our Vision</h1>
       <p className="mt-10 text-lg text-center text-neutral-600 max-w-4xl text-pretty">Our vision is to revolutionize the way we interact with vehicles on the road. We believe that Automatic Number Plate Recognition (ANPR) technology has the potential to transform the way we manage traffic, ensure public safety, and provide innovative solutions for businesses and individuals alike. Our goal is to harness the power of ANPR to create a safer, more efficient, and more connected world, where vehicles are seamlessly integrated into the fabric of our daily lives.</p>
     </div>
-    <div className="image">
+    <div className="image order-3 lg:order-none">
       <img src={vision} alt="Unable to Load..." className="rounded-md shadow-orange-500 shadow-lg w-full"></img>
     </div>
 
       {/* Third Card */}
-    <div className="image">
+    <div className="image order-5 lg:order-none">
       <img src={key} alt="Unable to Load..." className="rounded-md shadow-orange-500 shadow-lg"></img>
     </div>
-    <div className="text">
+    <div className="text order-6 lg:order-none">
       <h1 className="text-4xl sm:text-6xl lg:text-7xl text-center tracking-wide">Key Aspects</h1>
       <p className="mt-10 text-lg text-center text-neutral-600 max-w-4xl text-pretty">	<span className="text-2xl text-orange-400">&#8227;</span> <span className="text-orange-600">Enhanced Public Safety:</span> We envision a future where ANPR technology helps law enforcement agencies and traffic authorities to prevent and investigate crimes, reduce accidents, and improve overall road safety.<br />
 
@@ -43,7 +43,7 @@ const About = () => {
     </div>
     </div>
 
-    <div className="flex flex-col md:flex-row justify-center m-10 gap-48">
+    <div className="flex flex-col md:flex-row justify-center m-10 gap-24 sm:gap-48">
       <div className="flex flex-col">
         <h1 className="text-4xl sm:text-6xl lg:text-7xl text-center tracking-wide">10+</h1>
         <p className="mt-5 text-lg text-center text-neutral-600 max-w-4xl text-pretty">Years Of Experience</p>

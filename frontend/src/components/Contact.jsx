@@ -8,7 +8,7 @@ const Contact = () => {
     <div className="grid lg:grid-cols-2 gap-10 px-2 py-4 mt-10 rounded place-items-center">
         <div className="map">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d109744.2270933551!2d76.68831213423412!3d30.732254422057448!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fed0be66ec96b%3A0xa5ff67f9527319fe!2sChandigarh!5e0!3m2!1sen!2sin!4v1724525769033!5m2!1sen!2sin"
-        width="350" height="400"
+        width="300" height="400"
         style={{border: "2px", 'borderRadius': "5px"}}
         allowFullScreen
         loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>

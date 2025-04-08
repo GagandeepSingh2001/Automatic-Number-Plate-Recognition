@@ -34,7 +34,7 @@ const Footer = () => {
             <span className='flex gap-2'><Globe/><li className='mb-6 hover:bg-gradient-to-r from-orange-700 to-red-800 hover:text-transparent hover:bg-clip-text cursor-pointer'>www.ANPR.in</li></span>
             <span className='flex gap-2'><Mail/><li className='mb-6 hover:bg-gradient-to-r from-orange-700 to-red-800 hover:text-transparent hover:bg-clip-text cursor-pointer'>Support.anpr@gmail.in</li></span>
             <span className='flex gap-2'><Github/><li className='mb-6 hover:bg-gradient-to-r from-orange-700 to-red-800 hover:text-transparent hover:bg-clip-text cursor-pointer'>anprsupport.github.com</li></span>
-            <span className='flex gap-2'><Map/><li className='mb-6 hover:bg-gradient-to-r from-orange-700 to-red-800 hover:text-transparent hover:bg-clip-text cursor-pointer'>440 Phase 1 CHD</li></span>
+            <span className='flex gap-2'><Map/><li className='mb-6 hover:bg-gradient-to-r from-orange-700 to-red-800 hover:text-transparent hover:bg-clip-text cursor-pointer'>440 Industrial Phase 1 CHD</li></span>
             </div>
         </div>
     </div>
