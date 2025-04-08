@@ -61,7 +61,7 @@ const {userLoggedIn} = useAuth();
             autoplay/>
 
           <DotLottieReact
-          className="w-[27vw]"
+          className="w-[22vw]"
             src="https://lottie.host/4b12ac37-5b78-4653-ae21-5173743abe18/kpytkbqbT3.lottie"
             loop
             autoplay/>
