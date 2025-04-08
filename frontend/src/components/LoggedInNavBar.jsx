@@ -87,9 +87,9 @@ const LoggedInNavBar = () => {
                 </div>
             </div>
             {mobileMenuOpen && (
-                <div className="fixed right-0 z-20 bg-neutral-900 w-full p-12 flex flex-col justify-center items-center lg:hidden">
-                    <h1>Welcome, {user.name}</h1>
-                    <ul>
+                <div className="fixed right-0 z-20 bg-black/90 w-full h-[100dvh] p-12 flex flex-col justify-between items-center lg:hidden">
+                    <h1 className="bg-gradient-to-r from-white via-orange-500 to-white bg-clip-text text-transparent">Welcome, {user.name}</h1>
+                    <ul className="grid grid-cols-2">
 
                     {/* scroll to the component using react-scroll */}
                     {/* <Link to="home" spy={true} smooth={true} duration={500} offset={-80}>
