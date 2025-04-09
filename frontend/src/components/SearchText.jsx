@@ -30,7 +30,7 @@ const SearchText = () => {
       try {
           if (texts == "")  return toast("Please enter the license plate number...") ;
         
-            const response = await axios.post("http://127.0.0.1:8000/text", {
+            const response = await axios.post("https://anpr-webservice.onrender.com/text", {
             text: texts
           },
             {

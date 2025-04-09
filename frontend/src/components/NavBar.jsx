@@ -83,13 +83,12 @@ const NavBar = () => {
                     <NavLink to = "/FeaturesSection" className={(e)=>{return e.isActive ? "text-orange-400" : ""}}><li className="cursor-pointer hover:text-orange-400">Features</li></NavLink>
                     <NavLink to = "/About" className={(e)=>{return e.isActive ? "text-orange-400" : ""}}><li className="cursor-pointer hover:text-orange-400">About</li></NavLink>
                     <NavLink to = "/Contact" className={(e)=>{return e.isActive ? "text-orange-400" : ""}}><li className="cursor-pointer hover:text-orange-400">Contact</li></NavLink> */}
-                    { userLoggedIn && <h1>Welcome, {currentUser.email}</h1>}
-                    { userLoggedIn ? <button onClick={doSignOut} className="px-3 py-2 border rounded-md hover:translate-y-0.5 duration-200">Logout </button> : <></>}
+                    
                 </ul>
-                <div className="hidden lg:flex justify-center space-x-12 items-center">
-                    {/* <button onClick={async () => await loginWithRedirect()} className="px-3 py-2 border rounded-md hover:translate-y-0.5 duration-200">Sign In / Register</button> */}
-                    {/* <NavLink to ="/Register" className="px-3 py-2 border rounded-md hover:translate-y-0.5 duration-200">Sign In / Register</NavLink> */}
-                    {/* <a href= "#" className="bg-gradient-to-r from-orange-500 to-orange-800 px-3 py-2 rounded-md">Register</a> */}
+                {/* Firabase Login */}
+                <div className="hidden lg:flex space-x-10 items-center">
+                { userLoggedIn && <h1>Welcome, {currentUser.email}</h1>}
+                { userLoggedIn ? <button onClick={doSignOut} className="px-3 py-2 border rounded-md hover:translate-y-0.5 duration-200">Logout </button> : <></>}
                 </div>
                 <div className="lg:hidden md:flex flex-col justify-end">
                     <button onClick={toggleNavbar}>
