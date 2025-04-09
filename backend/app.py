@@ -21,7 +21,7 @@ import numpy as np
 from PIL import Image, ImageEnhance
 import torch
 import cv2
-app = Flask(__name__, static_folder="../frontend/dist", static_url_path="/")
+app = Flask(__name__)
 CORS(app)
 
 
@@ -29,10 +29,11 @@ class ClientApp:
     def __init__(self):
         self.filename = "inputImage.jpg"
 
-
-@app.route("/")
-def home():
-    return send_from_directory(app.static_folder, "index.html")
+# Deployment part for vercel which was used to serve the frontend on port 8000(backend)
+# @app.route("/")
+# def home():
+#     return send_from_directory(app.static_folder, "index.html")
+# app = Flask(__name__, static_folder="../frontend/dist", static_url_path="/")
 
 
 # training model 
