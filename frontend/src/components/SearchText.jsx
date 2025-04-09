@@ -24,6 +24,8 @@ const SearchText = () => {
       
       if (texts == "")  return toast("Please enter the license plate number...") ;
       setisloading(true);
+      const details = document.getElementById("details");
+      details.classList.add("hidden");
       // alert("Processing the Text to Extract data")
       toast.info("Processing the Text to Extract data")
       
