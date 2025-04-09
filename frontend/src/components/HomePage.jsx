@@ -48,20 +48,20 @@ const {userLoggedIn} = useAuth();
       {/* Right Side  */}
           <div className="basis-1/2 hidden lg:block place-items-center">
           <DotLottieReact
-          className="w-[clamp(10vw, 5vw, 25vw)] ml-20"
+          className="ml-10"
             src="https://lottie.host/c27e6752-6ea0-4d7a-9da1-49d872c76b6f/pwIzERgVR5.lottie"
             loop
             autoplay/>
 
         <span className="grid grid-cols-2">
           <DotLottieReact
-            className="w-[clamp(10vw, 5vw, 35vw)]"
+            className=""
             src="https://lottie.host/5a188b2a-f813-4bea-adf7-7556003ee311/zyfRA6DNYL.lottie"
             loop
             autoplay/>
 
           <DotLottieReact
-          className="w-[clamp(10vw, 5vw, 22vw)]"
+          className=""
             src="https://lottie.host/4b12ac37-5b78-4653-ae21-5173743abe18/kpytkbqbT3.lottie"
             loop
             autoplay/>
