@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "proxy": "https://anpr-webservice.onrender.com/",
+  "proxy": "https://automatic-number-plate-recognition-6p6v.onrender.com/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

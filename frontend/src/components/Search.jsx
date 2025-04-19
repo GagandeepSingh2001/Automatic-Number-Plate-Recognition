@@ -169,7 +169,7 @@ function Search() {
         details.classList.add("hidden");
         
         try {
-            const response = await axios.post("https://anpr-webservice.onrender.com/predict", {
+            const response = await axios.post("https://automatic-number-plate-recognition-6p6v.onrender.com/predict", {
                 image: image.split(",")[1] // Send only the base64 part after the comma,
             },
             {
