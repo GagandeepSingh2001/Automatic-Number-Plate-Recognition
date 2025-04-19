@@ -96,15 +96,15 @@ To run the application using Docker:
 
 1. Access the frontend interface by navigating to `http://localhost:5173` in your web browser.
 2. Upload an image containing a vehicle license plate.
-3. The application will display the detected license plate along with the recognized text.
+3. The application will display the detected license plate along with the recognized text.
 
 ## Dataset
 
-The model is trained on the [Vehicle Number Plate Detection Dataset](https://www.kaggle.com/dataturks/vehicle-number-plate-detection) from Kaggle, which contains images of Indian vehicles along with annotated license plates.
+The model is trained on the [Vehicle Number Plate Detection Dataset](https://www.kaggle.com/dataturks/vehicle-number-plate-detection) from Kaggle, which contains images of Indian vehicles along with annotated license plates.
 
 ## Model Training
 
-The object detection model is based on the SSD MobileNet V1 architecture and is trained using TensorFlow's Object Detection API.
+The object detection model is based on the SSD MobileNet V1 architecture and is trained using TensorFlow's Object Detection API.
 
 ### Steps:
 
@@ -127,7 +127,7 @@ The object detection model is based on the SSD MobileNet V1 architecture and is 
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgements
 
