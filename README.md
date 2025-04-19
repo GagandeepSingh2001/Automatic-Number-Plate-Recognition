@@ -1,6 +1,7 @@
 # Automatic Number Plate Recognition (ANPR)
 
-This project implements an Automatic Number Plate Recognition (ANPR) system capable of detecting and recognizing vehicle license plates from text, images, and video streams. It combines object detection techniques with Optical Character Recognition (OCR) to accurately identify license plate numbers, particularly tailored for Indian vehicles.
+This project implements an Automatic Number Plate Recognition (ANPR) system capable of detecting and recognizing vehicle license plates from text, images, and video streams.
+Welcome to our Number Plate Recognition platform — a powerful solution that utilizes advanced Optical Character Recognition (OCR) technology to accurately detect and track vehicle license plates in real-time. Designed to streamline urban traffic management, enhance public safety, and optimize operations in toll collection, parking, and law enforcement, our platform ensures high-performance accuracy and regulatory compliance. Built with React and styled using Tailwind CSS, it delivers a fast, responsive, and intuitive user experience across all devices. For secure and scalable authentication, we integrate Firebase for email authentication and Auth0 to manage user access for google accounts and ensure data security. Whether it's for city planning, traffic enforcement, or private infrastructure, our platform offers a seamless and intelligent approach to modern vehicle monitoring.
 
 ## Features
 
