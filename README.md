@@ -32,31 +32,7 @@ Automatic-Number-Plate-Recognition/
 
 - Python 3.7 or higher
 - Node.js and npm
-- Docker (optional, for containerized deployment)
-
-### Backend Setup
-
-1. Navigate to the backend directory:
-   ```bash
-   cd backend
-   ```
-
-2. Create a virtual environment and activate it:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
-
-3. Install the required Python packages:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. Run the Flask server:
-   ```bash
-   python app.py
-   ```
-
+- Docker (optional, for containerized deployment)
 
 ### Frontend Setup
 
@@ -90,6 +66,28 @@ To run the application using Docker:
    docker run -p 5000:5000 anpr-app
    ```
 
+### Backend Setup
+
+1. Navigate to the backend directory:
+   ```bash
+   cd backend
+   ```
+
+2. Create a virtual environment and activate it:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+3. Install the required Python packages:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. Run the Flask server:
+   ```bash
+   python app.py
+   ```
 
 ## Usage
 
