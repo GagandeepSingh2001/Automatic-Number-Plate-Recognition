@@ -34,6 +34,7 @@ Automatic-Number-Plate-Recognition/
 - Node.js and npm
 - Docker (optional, for containerized deployment)
 
+
 ### Frontend Setup
 
 1. Navigate to the frontend directory:
@@ -51,20 +52,6 @@ Automatic-Number-Plate-Recognition/
    npm run dev
    ```
 
-
-### Docker Deployment
-
-To run the application using Docker:
-
-1. Build the Docker image:
-   ```bash
-   docker build -t anpr-app .
-   ```
-
-2. Run the Docker container:
-   ```bash
-   docker run -p 5000:5000 anpr-app
-   ```
 
 ### Backend Setup
 
@@ -89,6 +76,22 @@ To run the application using Docker:
    python app.py
    ```
 
+
+### Docker Deployment
+
+To run the application using Docker:
+
+1. Build the Docker image:
+   ```bash
+   docker build -t anpr-app .
+   ```
+
+2. Run the Docker container:
+   ```bash
+   docker run -p 5000:5000 anpr-app
+   ```
+
+   
 ## Usage
 
 1. Access the frontend interface by navigating to `http://localhost:5173` in your web browser.
@@ -115,8 +118,8 @@ The object detection model is based on the SSD MobileNet V1 architecture and is 
 
 ## Technologies Used
 
-- **Frontend**: React.js
-- **Backend**: Flask
+- **Frontend**: React.js, Tailwind CSS
+- **Backend**: Python3, Flask
 - **Object Detection**: TensorFlow Object Detection API
 - **OCR**: Tesseract OCR
 - **Containerization**: Docker
