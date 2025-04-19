@@ -15,7 +15,7 @@ This project implements an Automatic Number Plate Recognition (ANPR) system capa
 ```
 
 Automatic-Number-Plate-Recognition/
-├── backend/               # Flask API for processing images
+├── backend/               # Flask API & python backend
 ├── frontend/              # React.js frontend for user interaction
 ├── model/                 # Pre-trained models and training scripts
 ├── data/                  # Sample images and datasets
